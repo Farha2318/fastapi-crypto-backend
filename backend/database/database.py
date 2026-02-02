@@ -1,11 +1,6 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from motor.motor_asyncio import AsyncIOMotorClient
 
-DATABASE_URL = "sqlite:///./test.db"
+MONGO_URL = "mongodb://localhost:27017"
 
-engine = create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+client = AsyncIOMotorClient(MONGO_URL)
+db = client["crypto_db"]   # database name
