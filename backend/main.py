@@ -1,13 +1,10 @@
 from fastapi import FastAPI
-from database.database import Base, engine
-from auth.routes import router as auth_router
+from fiat.routes import router as fiat_router
 
-Base.metadata.create_all(bind=engine)
+app = FastAPI(title="FastAPI Crypto Backend")
 
-app = FastAPI()
-
-app.include_router(auth_router)
+app.include_router(fiat_router)
 
 @app.get("/")
-def home():
-    return {"status": "Backend running"}
+def root():
+    return {"message": "FastAPI Crypto Backend running"}
